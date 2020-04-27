@@ -1,0 +1,42 @@
+/******************************************************************************
+ * This TOY program encodes using Hamming codes.
+ * It takes a data file from StdIn and sends the data along with parity bits to 
+   StdOut.
+ ******************************************************************************/
+                                         while(!StdIn.isEmpty()){
+10: 8AFF   read R[A]                     int m1 = StdIn.readInt();
+11: 74FF   R[4] <- 00FF                  //R[4] stores the value 00FF
+12: 7508   R[5] <- 0008                  //shifting by 8 bits 
+13: 5645   R[6] <- R[4] << R[5]          //Hence we can store FFFF
+14: 1746   R[7] <- R[4] + R[6]           //comparing with FFFF Hex value
+15: 28A6   R[8] <- R[A] - R[6]           
+         
+16: C828   if (R[8] == 0) goto 28        if(m1=0xFFFF)break;
+17: 8BFF   read R[B]                     int m2 = StdIn.readInt();
+18: 8CFF   read R[C]                     int m3 = StdIn.readInt();
+19: 8DFF   read R[D]                     int m4 = StdIn.readInt();
+
+                                         //The bits in the order of transmission
+1A: 9AFF   write R[A]                    StdOut.println(a);
+1B: 9BFF   write R[B]                    StdOut.println(b);
+1C: 9CFF   write R[C]                    StdOut.println(c);
+1D: 9DFF   write R[D]                    StdOut.println(d);
+                                         
+                                         //computing parity bits
+1E: 41BD   R[1] <- R[B] ^ R[D]           int p1 = m1 ^ m2 ^ m4;
+1F: 411A   R[1] <- R[1] ^ R[A]           
+
+20: 42CD   R[2] <- R[C] ^ R[D]           int p2 = m1 ^ m3 ^ m4;
+21: 422A   R[2] <- R[2] ^ R[A]           
+
+22: 43CD   R[3] <- R[C] ^ R[D]           int p3 = m2 ^ m3 ^ m4;
+23: 433B   R[3] <- R[3] ^ R[B]           
+
+24: 91FF   write R[1]                    StdOut.println(R[1]);
+25: 92FF   write R[2]                    StdOut.println(R[2]);
+26: 93FF   write R[3]                    StdOut.println(R[3]);
+
+27: C010   goto 10                       }
+28: 0000   halt                          
+
+

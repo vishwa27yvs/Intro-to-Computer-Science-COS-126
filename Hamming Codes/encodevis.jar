@@ -1,0 +1,34 @@
+/******************************************************************************
+ *  Name:
+ *  NetID:
+ *  Precept:
+ *
+ *  Description:
+ *
+ ******************************************************************************/
+
+10: 8AFF   read R[A]                     m1 = StdIn.readInt();
+11: 74FF   R[4] <- 00FF                  
+12: 7508   R[5] <- 0008                  
+13: 5645   R[6] <- R[4] << R[5]          
+14: 1746   R[7] <- R[4] + R[6]           
+15: 28A6   R[8] <- R[A] - R[6]           
+16: C828   if (R[8] == 0) goto 28        
+17: 8BFF   read R[B]                     m2 = StdIn.readInt();
+18: 8CFF   read R[C]                     m3 = StdIn.readInt();
+19: 8DFF   read R[D]                     m4 = StdIn.readInt();
+1A: 9AFF   write R[A]                    
+1B: 9BFF   write R[B]                    
+1C: 9CFF   write R[C]                    
+1D: 9DFF   write R[D]                    
+1E: 41BD   R[1] <- R[B] ^ R[D]           
+1F: 411A   R[1] <- R[1] ^ R[A]           
+20: 42CD   R[2] <- R[C] ^ R[D]           
+21: 422A   R[2] <- R[2] ^ R[A]           
+22: 43CD   R[3] <- R[C] ^ R[D]           
+23: 433B   R[3] <- R[3] ^ R[B]           
+24: 91FF   write R[1]                    
+25: 92FF   write R[2]                    
+26: 93FF   write R[3]                    
+27: C010   goto 10                       
+28: 0000   halt                                          
